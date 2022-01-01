@@ -19,18 +19,17 @@
 trigger:
   branches:
     include:
-    - dev
-    - staging
-    - master
-
-pool:
-  name: dev
-  demands:
-  - Agent.Name -equals centos
+      - dev
+      - staging
+      - master
 
 stages:
 - stage: dev_backend
   condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
+  pool:
+    name: dev
+    demands:
+    - Agent.Name -equals centos
   jobs:
   - job: Dev_deploy
     steps:
@@ -42,10 +41,45 @@ stages:
       displayName: 'Download env file'
       inputs:
         secureFile: 'env.dev.env'
-
+    - task: CopyFiles@2
+      inputs:
+        #sourceFolder: $(Agent.TempDirectory)
+        contents: $(mySecureFile.secureFilePath) 
+        targetFolder: $(Build.SourcesDirectory)
     - script: |
         dir $(Build.SourcesDirectory)
         cd $(Build.SourcesDirectory)
+        ls -al
+#        npm install
+#        pm2 restart app
+      displayName: 'npm install and pm2 restart'
+
+- stage: prod_backend
+  condition: eq(variables['build.sourceBranch'], 'refs/heads/master')
+  pool:
+    name: prod
+    demands:
+    - Agent.Name -equals centos
+  jobs:
+  - job: prod_deploy
+    steps:
+
+    - checkout: self
+
+    - task: DownloadSecureFile@1
+      name: env
+      displayName: 'Download env file'
+      inputs:
+        secureFile: 'env.prod.env'
+    - task: CopyFiles@2
+      inputs:
+        #sourceFolder: $(Agent.TempDirectory)
+        contents: $(mySecureFile.secureFilePath) 
+        targetFolder: $(Build.SourcesDirectory)
+    - script: |
+        dir $(Build.SourcesDirectory)
+        cd $(Build.SourcesDirectory)
+        cp $(mySecureFile.secureFilePath) .
         ls -al
 #        npm install
 #        pm2 restart good-action-api
