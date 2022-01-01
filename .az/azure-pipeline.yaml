@@ -19,18 +19,18 @@
 trigger:
   branches:
     include:
-      - dev
-      - staging
-      - master
+    - dev
+    - staging
+    - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 stages:
-- stage: dev-backend
+- stage: dev_backend
   condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
   jobs:
-  - job: Dev-deploy
+  - job: Dev_deploy
     steps:
 
     - checkout: self
