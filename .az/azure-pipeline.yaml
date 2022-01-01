@@ -1,0 +1,50 @@
+resources:
+  repositories:
+  - repository: nodeapp-prod
+    type: github
+    endpoint: github
+    name: adekoyadapo/nodeapp
+    ref: master
+  - repository: nodeapp-dev
+    type: github
+    endpoint: github
+    name: adekoyadapo/nodeapp
+    ref: dev
+  - repository: nodeapp-feature
+    type: github
+    endpoint: github
+    name: adekoyadapo/nodeapp
+    ref: feature/az
+
+trigger:
+  branches:
+    include:
+      - dev
+      - staging
+      - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: dev-backend
+  condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
+  jobs:
+  - job: Dev-deploy
+    steps:
+
+    - checkout: nodeapp-dev
+
+    - task: DownloadSecureFile@1
+      name: env
+      displayName: 'Download env file'
+      inputs:
+        secureFile: 'env.dev.env'
+
+    - script: |
+        dir $(Build.SourcesDirectory)
+        cd $(Build.SourcesDirectory)
+        ls -al
+#        npm install
+#        pm2 restart good-action-api
+      displayName: 'npm install and pm2 restart'
