@@ -24,7 +24,9 @@ trigger:
     - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: dev
+  demands:
+  - Agent.Name -equals centos
 
 stages:
 - stage: dev_backend
