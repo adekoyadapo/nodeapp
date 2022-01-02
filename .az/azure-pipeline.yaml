@@ -1,20 +1,20 @@
-resources:
-  repositories:
-  - repository: nodeapp-prod
-    type: git
-    endpoint: github
-    name: adekoyadapo/nodeapp
-    ref: master
-  - repository: nodeapp-dev
-    type: github
-    endpoint: github
-    name: adekoyadapo/nodeapp
-    ref: dev
-  - repository: nodeapp-feature
-    type: github
-    endpoint: github
-    name: adekoyadapo/nodeapp
-    ref: feature/az
+#resources:
+#  repositories:
+#  - repository: nodeapp-prod
+#    type: git
+#    endpoint: github
+#    name: adekoyadapo/nodeapp
+#    ref: master
+#  - repository: nodeapp-dev
+#    type: github
+#    endpoint: github
+#    name: adekoyadapo/nodeapp
+#    ref: dev
+#  - repository: nodeapp-feature
+#    type: github
+#    endpoint: github
+#    name: adekoyadapo/nodeapp
+#    ref: feature/az
 
 trigger:
   branches:
