@@ -44,9 +44,11 @@ stages:
     - task: CopyFiles@2
       inputs:
         #sourceFolder: $(Agent.TempDirectory)
-        contents: $(env.secureFilePath) 
+        contents: $(env.secureFilePath)
         targetFolder: $(Build.SourcesDirectory)
     - script: |
+        echo $(env.secureFilePath)
+        cp $(env.secureFilePath) $(Build.SourcesDirectory)/.
         dir $(Build.SourcesDirectory)
         cd $(Build.SourcesDirectory)
         ls -al
