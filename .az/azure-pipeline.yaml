@@ -43,15 +43,15 @@ stages:
         secureFile: 'env.dev.env'
     - task: CopyFiles@2
       inputs:
-        #sourceFolder: $(Agent.TempDirectory)
-        contents: $(env.secureFilePath) 
+        sourceFolder: $(Agent.TempDirectory)
+        contents: '*.env'
         targetFolder: $(Build.SourcesDirectory)
     - script: |
         dir $(Build.SourcesDirectory)
         cd $(Build.SourcesDirectory)
         ls -al
-#        npm install
-#        pm2 restart app
+        npm install
+        pm2 restart app
       displayName: 'npm install and pm2 restart'
 
 #- stage: prod_backend
