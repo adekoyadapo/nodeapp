@@ -3,8 +3,11 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+
+
 trigger:
 - master
+- dev
 
 pool:
   name: dev
