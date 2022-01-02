@@ -22,12 +22,23 @@ steps:
     npm install
   displayName: 'build'
 
+- task: DownloadSecureFile@1
+  condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
+  name: env
+  displayName: 'Download env file'
+  inputs:
+    secureFile: 'env.dev.env'
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Agent.TempDirectory)
+    contents: '*.env'
+    targetFolder: $(Build.SourcesDirectory)
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: true
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-$(build.sourceBranch).zip'
     replaceExistingArchive: true
   displayName: 'Archive'
 - task: PublishBuildArtifacts@1
