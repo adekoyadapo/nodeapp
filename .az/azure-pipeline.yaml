@@ -44,7 +44,7 @@ stages:
     - task: CopyFiles@2
       inputs:
         #sourceFolder: $(Agent.TempDirectory)
-        contents: $(mySecureFile.secureFilePath) 
+        contents: $(env.secureFilePath) 
         targetFolder: $(Build.SourcesDirectory)
     - script: |
         dir $(Build.SourcesDirectory)
