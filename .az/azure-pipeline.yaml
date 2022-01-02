@@ -43,12 +43,10 @@ stages:
         secureFile: 'env.dev.env'
     - task: CopyFiles@2
       inputs:
-        #sourceFolder: $(Agent.TempDirectory)
-        contents: $(env.secureFilePath)
+        sourceFolder: $(Agent.TempDirectory)
+        contents: '*'
         targetFolder: $(Build.SourcesDirectory)
     - script: |
-        echo $(env.secureFilePath)
-        cp $(env.secureFilePath) $(Build.SourcesDirectory)/.
         dir $(Build.SourcesDirectory)
         cd $(Build.SourcesDirectory)
         ls -al
