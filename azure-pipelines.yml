@@ -48,7 +48,7 @@ steps:
     rootFolderOrFile: '$(Build.SourcesDirectory)'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.BuildId)-$(build.sourceBranchName)-$(commitHash).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-$(build.sourceBranchName)-$(commitHash).zip'
     replaceExistingArchive: true
   displayName: 'Archive'
   
