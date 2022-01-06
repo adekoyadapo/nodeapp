@@ -59,25 +59,16 @@ stages:
   
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        rootFolderOrFile: $(Build.SourcesDirectory)
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.BuildId)-$(build.sourceBranchName)-$(commitHash).zip'
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-$(build.sourceBranchName)-$(commitHash).zip
         replaceExistingArchive: true
       displayName: 'Archive build Artifacts'      
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: '$(build.sourceBranchName)'
+        PathtoPublish: $(Build.ArtifactStagingDirectory)
+        ArtifactName: $(build.sourceBranchName)
         publishLocation: 'Container'
       displayName: 'Publish Artifacts'
-
-- stage: Deploy
-  jobs: 
-  - job: Deploy_to_dev
-    condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
-    pool: 
-     name: dev
-     demands:
-     - Agent.Name -equals centos
 
