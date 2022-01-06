@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
       title: 'Coming Soon!', 
       mainText: 'Eventually Podcast - The new Deal', 
       subText: `Drop your email address below and we will let you know when we launch the Eventually podcast. 
-      <br>Brought to you by amazing people`
+      <br>Brought to you by a pool of amazing people`
     }
     );
 });
