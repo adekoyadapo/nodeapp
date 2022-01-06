@@ -72,12 +72,3 @@ stages:
         publishLocation: 'Container'
       displayName: 'Publish Artifacts'
 
-- stage: Deploy
-  jobs: 
-  - job: Deploy_to_dev
-    condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
-    pool: 
-     name: dev
-     demands:
-     - Agent.Name -equals centos
-
