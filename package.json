@@ -1,23 +1,17 @@
 {
-  "name": "nodeapp",
+  "name": "eventually-podcast",
   "version": "1.0.0",
-  "description": "test node app",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aadekoya/nodeapp.git"
-  },
-  "author": "Ade Adekoya",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/aadekoya/nodeapp/issues"
-  },
-  "homepage": "https://github.com/aadekoya/nodeapp#readme",
   "dependencies": {
-    "express": "^4.17.2",
-    "pm2": "^5.1.2"
+    "express": "^4.17.1",
+    "pug": "^3.0.2"
   }
 }
