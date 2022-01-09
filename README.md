@@ -1,4 +1,4 @@
-## Eventually Podcast
+## Nodejs Demo App
 
-A demo project to show how to build a demo app with Express js and Pug.
+A demo project to deploy a nodejs app with testing and azure pipeline.
 
