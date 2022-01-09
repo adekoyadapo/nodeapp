@@ -26,8 +26,14 @@ stages:
     
     - script: |
         npm install
-      displayName: 'build'
+        npm test
+      displayName: 'build and test'
     
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/TEST-*.xml'
+
     - task: DownloadSecureFile@1
       condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
       name: env_dev
