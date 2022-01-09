@@ -26,8 +26,14 @@ stages:
     
     - script: |
         npm install
-      displayName: 'build'
+        npm test
+      displayName: 'build and test'
     
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/TEST-*.xml'
+
     - task: DownloadSecureFile@1
       condition: eq(variables['build.sourceBranch'], 'refs/heads/dev')
       name: env_dev
@@ -59,16 +65,16 @@ stages:
   
     - task: ArchiveFiles@2
       inputs:
-        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        rootFolderOrFile: $(Build.SourcesDirectory)
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.BuildId)-$(build.sourceBranchName)-$(commitHash).zip'
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-$(build.sourceBranchName)-$(commitHash).zip
         replaceExistingArchive: true
       displayName: 'Archive build Artifacts'      
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: '$(build.sourceBranchName)'
+        PathtoPublish: $(Build.ArtifactStagingDirectory)
+        ArtifactName: $(build.sourceBranchName)
         publishLocation: 'Container'
       displayName: 'Publish Artifacts'
 
