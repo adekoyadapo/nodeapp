@@ -12,9 +12,14 @@ const courses = [
   {id: 3, name: 'course3'},
 ];
 // Respond with "hello world" for requests that hit our root "/"
-app.get("/", function (req, res) {
+app.get("/hello", function (req, res) {
  return res.send("Hello World");
 });
+
+app.get('/courses' , (req, res) => {
+  res.send(courses);
+  });
+
 
 app.get("/healthz", function (req, res) {
   return res.send("Healthy");

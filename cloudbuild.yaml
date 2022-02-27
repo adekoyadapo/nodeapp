@@ -1,0 +1,4 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'northamerica-northeast1-docker.pkg.dev/sada-ade-marapost-poc-7cbdc8a2/nodeapp/node', '.']
+images: ['northamerica-northeast1-docker.pkg.dev/sada-ade-marapost-poc-7cbdc8a2/nodeapp/node']
