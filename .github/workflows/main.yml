@@ -42,9 +42,6 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: aade/nodeapp
-          tags: |
-            type=raw,value=latest
-            type=raw,value={{tag}}
           labels: |
             maintainer=Ade
             org.opencontainers.image.title=NodeApp
