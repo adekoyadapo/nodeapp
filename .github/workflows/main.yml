@@ -39,7 +39,7 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: aade/nodeapp
           labels: |
@@ -47,6 +47,12 @@ jobs:
             org.opencontainers.image.title=NodeApp
             org.opencontainers.image.description=Hello World Nodejs
             org.opencontainers.image.vendor=360ace
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha
+          flavor: |
+            latest=auto
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub
