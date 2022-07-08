@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "PORT=3001 mocha ./test/* --exit"
+    "test": "PORT=3001 jest ./test/* --forceExit"
   },
   "keywords": [],
   "author": "",
@@ -13,12 +13,17 @@
   "dependencies": {
     "ansi-regex": "^6.0.1",
     "express": "^4.18.1",
+    "jest-junit-reporter": "^1.1.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
     "index": "^0.4.0",
-    "mocha": "^9.2.2",
-    "mocha-junit-reporter": "^2.0.2",
+    "jest": "^27.1.2",
+    "jest-html-reporter": "^3.5.0",
     "supertest": "^6.2.4"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testResultsProcessor":  "./node_modules/jest-junit-reporter"
   }
 }

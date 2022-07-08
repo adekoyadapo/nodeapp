@@ -3,5 +3,8 @@
 azure*
 *.md
 *.txt
-.*ignore
+*ignore
 Dockerfile
+coverage
+*TEST*
+*report*
