@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./test/* --exit"
+    "test": "PORT=3001 mocha ./test/* --exit"
   },
   "keywords": [],
   "author": "",
