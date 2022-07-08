@@ -96,10 +96,10 @@ stages:
         inputs:
           command: "build"
           Dockerfile: "Dockerfile"
+          repository: "nodeapp"
           tags: |
             latest
             $(commitHash)
-          arguments: "-t nodeapp:$(tag)"
 
       - task: CmdLine@2
         displayName: Scan for reports
