@@ -4,3 +4,4 @@ azure*
 *.md
 *.txt
 .*ignore
+Dockerfile
