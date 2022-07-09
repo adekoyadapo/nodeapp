@@ -162,3 +162,16 @@ stages:
         inputs:
           testResultsFormat: "JUnit" # Options: JUnit, NUnit, VSTest, xUnit, cTest
           testResultsFiles: "**/junit-report-*.xml"
+
+      - task: CmdLine@2
+        displayName: Deploy docker image
+        continueOnError: true
+        inputs:
+          script: |
+            if docker ps -a | awk '{ if( FNR>1 ) { print $NF }}' | grep nodeapp; then 
+              echo "Container running, it will be restarted shortly"
+              docker rm -f nodeapp
+              docker run -d -it --name nodeapp -p 8080:3000 nodeapp:$(commitHash)
+            else 
+              docker run -d -it --name nodeapp -p 8080:3000 nodeapp:$(commitHash); 
+            fi
